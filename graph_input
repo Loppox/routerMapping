@@ -6,6 +6,7 @@ Graph beispiel {
     D = 7;
     E = 6;
     F = 4;
+    G = 8;
     // Links mit zugeh. Kosten
     A - B : 10;
     A - C : 10;
@@ -16,4 +17,6 @@ Graph beispiel {
     D - E : 2;
     D - F : 10;
     E - F : 2;
+    G - D : 7;
+    G - F : 12;
 }
