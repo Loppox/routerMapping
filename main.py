@@ -68,7 +68,7 @@ def get_root(graph: Graph):
                 elif node.root == message[1] and message[2] < node.root_cost:
                     node.root_cost = message[2]
                     node.root_name = message[0]
-                node.broadcast_message()
+            node.broadcast_message()
             node.message_queue.clear()
 
 
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     graph = Graph()
     parser(graph)
     t2 = time.time()
-    for _ in range(5):
+    for _ in range(20):
         get_root(graph)
     t4 = time.time()
     for node in graph.nodes:
