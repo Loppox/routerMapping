@@ -1,4 +1,5 @@
 import time
+import random
 
 class Node:
     def __init__(self, name, root):
@@ -57,19 +58,16 @@ def parser(graph: Graph):
 
 
 def get_root(graph: Graph):
-    for node in graph.nodes:
-        if not node.message_queue:
-            node.broadcast_message()
-        else:
-            messages = node.message_queue[:]
-            for message in messages:
-                if node.root > message[1]:
-                    node.update_root(*message)
-                elif node.root == message[1] and message[2] < node.root_cost:
-                    node.root_cost = message[2]
-                    node.root_name = message[0]
-            node.broadcast_message()
-            node.message_queue.clear()
+    node = graph.nodes[random.randint(0, len(graph.nodes) - 1)]
+    messages = node.message_queue[:]
+    for message in messages:
+        if node.root > message[1]:
+            node.update_root(*message)
+        elif node.root == message[1] and message[2] < node.root_cost:
+            node.root_cost = message[2]
+            node.root_name = message[0]
+    node.broadcast_message()
+    node.message_queue.clear()
 
 
 if __name__ == "__main__":
@@ -77,7 +75,7 @@ if __name__ == "__main__":
     graph = Graph()
     parser(graph)
     t2 = time.time()
-    for _ in range(20):
+    for _ in range(50):
         get_root(graph)
     t4 = time.time()
     for node in graph.nodes:
